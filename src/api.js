@@ -38,3 +38,11 @@ export function getUsers() {
             return response.data.users;
         })
 }
+
+export function postUser(newAccountInfo) {
+    return apiBaseUrl
+        .post(`/users`, newAccountInfo)
+        .then((response) => {
+            return response;
+        })
+}

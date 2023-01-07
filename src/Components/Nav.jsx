@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
 function Nav( {loggedInUsername} ) {
-    console.log(loggedInUsername, "<<<<<<<<<<< loggedInUsername");
     return (
         <nav>
             {loggedInUsername ? null : <Link to="/">Home</Link>}            

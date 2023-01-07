@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function Home( {allUsers, updateLoggedInUsername} ) {
-    const [usernameInput, updateUsernameInput] = useState();
+    const [usernameInput, updateUsernameInput] = useState("");
     const [doesUsernameExist, updateDoesUsernameExist] = useState(true);
 
     useEffect(() => {
@@ -29,7 +30,8 @@ function Home( {allUsers, updateLoggedInUsername} ) {
         <section>
             <h2>Home</h2>
             <p>Welcome to NC Marketplace, a site where you can buy and sell secondhand stuff.</p>
-            <p>Please login to view, buy, and sell stuff.</p>
+            <p>If you are new to the site, you need to <Link to="/create-an-account">create an account</Link> to view, buy or sell goods.</p>
+            <p>If you already have an account, please login below.</p>
             <form onSubmit={handleSubmit} action="/items">
                 {doesUsernameExist ? null : <p id="username-does-not-exist">Username does not exist.</p>}
                 <label htmlFor="username">Enter your username:</label>

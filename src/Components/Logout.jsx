@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
 
-function LogOut() {
+function Logout( {loggedInUsername} ) {
     return (
-        <Link to="/">Log Out</Link>
+        <div>
+            <div>Logged in as {loggedInUsername}</div>
+            <Link to="/">Logout</Link>
+        </div>
     )
 }
 
-export default LogOut;
+export default Logout;

@@ -21,3 +21,16 @@ nav {
 #username-does-not-exist {
   color: red;
 }
+
+#username-is-available {
+  color: green;
+}
+
+#username-is-not-available {
+  color: red;
+}
+
+#new-avatar-url {
+  width: 100%;
+  max-width: 700px;
+}

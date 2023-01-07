@@ -13,10 +13,14 @@ function Items( {loggedInUsername, updateLoggedInUsername} ) {
 
     let [searchParams, updateSearchParams] = useSearchParams();
     const username = searchParams.get('username');
+    const newUsername = searchParams.get('new-username');
 
     useEffect(() => {
         if (username) {
             updateLoggedInUsername(username);
+        }
+        if (newUsername) {
+            updateLoggedInUsername(newUsername);
         }        
     }, []);
 

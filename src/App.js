@@ -28,11 +28,11 @@ import SingleProduct from './Components/SingleProduct';
 import OrderConfirmation from './Components/OrderConfirmation';
 import Users from './Components/Users';
 import Logout from './Components/Logout';
+import CreateAnAccount from './Components/CreateAnAccount';
 
 function App() {
   const [allUsers, updateAllUsers] = useState( [] );
   const [loggedInUsername, updateLoggedInUsername] = useState(null);
-  // const [isLoggedIn, updateIsLoggedIn] = useState(false);
 
   console.log(loggedInUsername, "<<<<<<<<<<<<<<<<< loggedInUsername")
 
@@ -46,7 +46,7 @@ function App() {
   return (
     <div className="App">      
       <Header />
-      {loggedInUsername ? <Logout /> : null}      
+      {loggedInUsername ? <Logout loggedInUsername={loggedInUsername}/> : null}      
       {loggedInUsername ? <Nav loggedInUsername={loggedInUsername}/> : null}
       <Routes>
         <Route path="/" element={<Home allUsers={allUsers} updateLoggedInUsername={updateLoggedInUsername}/>}></Route>
@@ -54,6 +54,7 @@ function App() {
         <Route path="/items/:item_id" element={<SingleProduct loggedInUsername={loggedInUsername}/>}></Route>
         <Route path="/order-confirmation" element={<OrderConfirmation />}></Route>
         <Route path="/users" element={<Users allUsers={allUsers} updateAllUsers={updateAllUsers} loggedInUsername={loggedInUsername}/>}></Route>
+        <Route path="/create-an-account" element={<CreateAnAccount updateLoggedInUsername={updateLoggedInUsername}/>}></Route>
       </Routes>
       <Footer />
     </div>

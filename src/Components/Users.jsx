@@ -1,6 +1,5 @@
 function Users( {allUsers, updateAllUsers, loggedInUsername} ) {   
 
-    console.log(allUsers, "<<<<<<< allUsers");
     console.log(loggedInUsername, "<<<<<<<<<<<< loggedInUsername");
 
     const renderAllUsers = allUsers.map((user) => {
