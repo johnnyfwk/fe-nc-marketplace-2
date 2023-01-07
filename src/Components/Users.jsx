@@ -1,6 +1,7 @@
-function Users( {allUsers, updateAllUsers} ) {   
+function Users( {allUsers, updateAllUsers, loggedInUsername} ) {   
 
     console.log(allUsers, "<<<<<<< allUsers");
+    console.log(loggedInUsername, "<<<<<<<<<<<< loggedInUsername");
 
     const renderAllUsers = allUsers.map((user) => {
         return <div key={user.username}>

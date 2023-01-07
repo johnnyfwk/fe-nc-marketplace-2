@@ -27,10 +27,14 @@ import Footer from './Components/Footer';
 import SingleProduct from './Components/SingleProduct';
 import OrderConfirmation from './Components/OrderConfirmation';
 import Users from './Components/Users';
+import Logout from './Components/Logout';
 
 function App() {
   const [allUsers, updateAllUsers] = useState( [] );
-  const [loggedInUsername, updateLoggedInUsername] = useState("Ant");
+  const [loggedInUsername, updateLoggedInUsername] = useState(null);
+  // const [isLoggedIn, updateIsLoggedIn] = useState(false);
+
+  console.log(loggedInUsername, "<<<<<<<<<<<<<<<<< loggedInUsername")
 
   useEffect(() => {
     api.getUsers()
@@ -42,14 +46,14 @@ function App() {
   return (
     <div className="App">      
       <Header />
-      <Nav />
-      {/* {loggedInUsername ? <Nav /> : null} */}
+      {loggedInUsername ? <Logout /> : null}      
+      {loggedInUsername ? <Nav loggedInUsername={loggedInUsername}/> : null}
       <Routes>
         <Route path="/" element={<Home allUsers={allUsers} updateLoggedInUsername={updateLoggedInUsername}/>}></Route>
-        <Route path="/items" element={<Items loggedInUsername={loggedInUsername}/>}></Route>
+        <Route path="/items" element={<Items loggedInUsername={loggedInUsername} updateLoggedInUsername={updateLoggedInUsername}/>}></Route>
         <Route path="/items/:item_id" element={<SingleProduct loggedInUsername={loggedInUsername}/>}></Route>
         <Route path="/order-confirmation" element={<OrderConfirmation />}></Route>
-        <Route path="/users" element={<Users allUsers={allUsers} updateAllUsers={updateAllUsers}/>}></Route>
+        <Route path="/users" element={<Users allUsers={allUsers} updateAllUsers={updateAllUsers} loggedInUsername={loggedInUsername}/>}></Route>
       </Routes>
       <Footer />
     </div>

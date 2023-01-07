@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function Home( {allUsers, updateLoggedInUsername} ) {
     const [usernameInput, updateUsernameInput] = useState();
     const [doesUsernameExist, updateDoesUsernameExist] = useState(true);
 
-    console.log(usernameInput, "<<<<<<<<<<<<<< usernameInput");
+    useEffect(() => {
+        updateLoggedInUsername(null);    
+    }, []);
 
     const existingUsers = allUsers.map((user) => {
         return user.username.toLowerCase();

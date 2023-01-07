@@ -1,14 +1,24 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import * as api from '../api';
 import SelectCategory from './SelectCategory';
 import DisplayProducts from './DisplayProducts';
 
-function Items( {loggedInUsername} ) {
+function Items( {loggedInUsername, updateLoggedInUsername} ) {
     const [availableProducts, updateAvailableProducts] = useState( [] );
     const [availableCategories, updateAvailableCategories] = useState( ["All"] );
     const [selectedCategory, updateSelectedCategory] = useState( "All" );
 
-    console.log(loggedInUsername, "<<<<<<<<<<< loggedInUsername");
+    console.log(loggedInUsername, "<<<<<<<<<<<< loggedInUsername");
+
+    let [searchParams, updateSearchParams] = useSearchParams();
+    const username = searchParams.get('username');
+
+    useEffect(() => {
+        if (username) {
+            updateLoggedInUsername(username);
+        }        
+    }, []);
 
     useEffect(() => {
         api.getItems()
