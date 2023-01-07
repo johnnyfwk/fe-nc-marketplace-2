@@ -18,7 +18,7 @@ function SingleProduct() {
             <h1>{singleProduct.item_name}</h1>
             <img src={singleProduct.img_url} alt={singleProduct.item_name}></img>
             <p>{singleProduct.description}</p>
-            <p>Price: £{singleProduct.price}</p>
+            <p>Price: £{parseFloat(singleProduct.price)/100}</p>
         </div>
     )
 }
