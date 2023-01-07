@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
-function DisplayItems( {availableItems, selectedCategory} ) {    
-    const renderItems = availableItems.map((item) => {
+function DisplayProducts( {availableProducts, selectedCategory} ) {    
+    const renderItems = availableProducts.map((item) => {
         return <div key={item.item_id}>
             <h3>{item.item_name}</h3>
             <img src={item.img_url} alt={item.item_name}></img>
@@ -18,4 +18,4 @@ function DisplayItems( {availableItems, selectedCategory} ) {
     )
 }
 
-export default DisplayItems;
+export default DisplayProducts;

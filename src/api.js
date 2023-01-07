@@ -30,3 +30,11 @@ export function getCategories() {
             return categories;
         })
 }
+
+export function getUsers() {
+    return apiBaseUrl
+        .get('/users')
+        .then((response) => {
+            return response.data.users;
+        })
+}

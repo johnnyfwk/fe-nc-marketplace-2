@@ -13,31 +13,43 @@ Functionality:
 - A user can view the items in their basket
 - A user can remove items from their basket
 - A user can create a new user profile
-
-Endpoints and states:
-/ - Homepage - does not require access to any states
-/items - View all items - [availableItems, updateAvailableItems]
-
 */
 
 import './App.css';
+import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import * as api from './api';
 import Header from './Components/Header';
 import Nav from './Components/Nav';
 import Home from './Components/Home';
 import Items from './Components/Items';
 import Footer from './Components/Footer';
 import SingleProduct from './Components/SingleProduct';
+import OrderConfirmation from './Components/OrderConfirmation';
+import Users from './Components/Users';
 
 function App() {
+  const [allUsers, updateAllUsers] = useState( [] );
+  const [loggedInUsername, updateLoggedInUsername] = useState("Ant");
+
+  useEffect(() => {
+    api.getUsers()
+        .then((users) => {
+            updateAllUsers(users);
+        })
+  }, []);
+
   return (
-    <div className="App">
+    <div className="App">      
       <Header />
       <Nav />
+      {/* {loggedInUsername ? <Nav /> : null} */}
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/items" element={<Items />}></Route>
-        <Route path="/items/:item_id" element={<SingleProduct />}></Route>
+        <Route path="/" element={<Home allUsers={allUsers} updateLoggedInUsername={updateLoggedInUsername}/>}></Route>
+        <Route path="/items" element={<Items loggedInUsername={loggedInUsername}/>}></Route>
+        <Route path="/items/:item_id" element={<SingleProduct loggedInUsername={loggedInUsername}/>}></Route>
+        <Route path="/order-confirmation" element={<OrderConfirmation />}></Route>
+        <Route path="/users" element={<Users allUsers={allUsers} updateAllUsers={updateAllUsers}/>}></Route>
       </Routes>
       <Footer />
     </div>
