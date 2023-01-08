@@ -4,9 +4,9 @@ import * as api from '../api';
 import SelectCategory from './SelectCategory';
 import DisplayProducts from './DisplayProducts';
 
-function Items( {loggedInUsername, updateLoggedInUsername} ) {
+function Items( {loggedInUsername, updateLoggedInUsername, availableCategories, updateAvailableCategories} ) {
     const [availableProducts, updateAvailableProducts] = useState( [] );
-    const [availableCategories, updateAvailableCategories] = useState( ["All"] );
+    // const [availableCategories, updateAvailableCategories] = useState( ["All"] );
     const [selectedCategory, updateSelectedCategory] = useState( "All" );
 
     console.log(loggedInUsername, "<<<<<<<<<<<< loggedInUsername");

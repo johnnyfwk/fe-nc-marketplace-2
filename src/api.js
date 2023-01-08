@@ -46,3 +46,11 @@ export function postUser(newAccountInfo) {
             return response;
         })
 }
+
+export function postAnItemForSale(itemToPostForSale) {
+    return apiBaseUrl
+        .post('/items/', itemToPostForSale)
+        .then((response) => {
+            return response;
+        })
+}

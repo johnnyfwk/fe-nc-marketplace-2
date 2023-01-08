@@ -16,11 +16,9 @@ function Home( {allUsers, updateLoggedInUsername} ) {
     function handleSubmit(event) {
         updateDoesUsernameExist(true);
         if (existingUsers.includes(usernameInput)) {
-            console.log("User is in the database");
             updateLoggedInUsername(usernameInput);
         }
         else {
-            console.log("User is NOT in the database");
             updateDoesUsernameExist(false);
             event.preventDefault();
         }

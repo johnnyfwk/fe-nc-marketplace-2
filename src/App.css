@@ -18,19 +18,24 @@ nav {
   gap: 10px;
 }
 
-#username-does-not-exist {
+#username-does-not-exist,
+#username-is-not-available,
+#post-an-item-for-sale-failed {
   color: red;
 }
 
-#username-is-available {
+#username-is-available,
+#product-purchase-confirmation-message,
+#post-an-item-for-sale-successful {
   color: green;
-}
-
-#username-is-not-available {
-  color: red;
 }
 
 #new-avatar-url {
   width: 100%;
   max-width: 700px;
+}
+
+#sell-an-item-description {
+  width: 100%;
+  max-width: 500px;
 }

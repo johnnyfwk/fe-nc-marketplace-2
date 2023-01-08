@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import * as api from '../api';
 
-function CreateAnAccount( {updateLoggedInUsername} ) {
+function CreateAnAccount() {
     const [newUsernameInput, updateNewUsernameInput] = useState( "" );
     const [isUsernameAvailable, updateIsUsernameAvailable] = useState( null );
     const [existingUsers, updateExistingUsers] = useState( [] );

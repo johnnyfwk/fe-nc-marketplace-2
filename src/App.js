@@ -29,10 +29,13 @@ import OrderConfirmation from './Components/OrderConfirmation';
 import Users from './Components/Users';
 import Logout from './Components/Logout';
 import CreateAnAccount from './Components/CreateAnAccount';
+import SellAnItem from './Components/SellAnItem';
 
 function App() {
+  const [availableCategories, updateAvailableCategories] = useState( ["All"] );
   const [allUsers, updateAllUsers] = useState( [] );
   const [loggedInUsername, updateLoggedInUsername] = useState(null);
+  const [buyNow, updateBuyNow] = useState( {} );
 
   console.log(loggedInUsername, "<<<<<<<<<<<<<<<<< loggedInUsername")
 
@@ -50,11 +53,12 @@ function App() {
       {loggedInUsername ? <Nav loggedInUsername={loggedInUsername}/> : null}
       <Routes>
         <Route path="/" element={<Home allUsers={allUsers} updateLoggedInUsername={updateLoggedInUsername}/>}></Route>
-        <Route path="/items" element={<Items loggedInUsername={loggedInUsername} updateLoggedInUsername={updateLoggedInUsername}/>}></Route>
-        <Route path="/items/:item_id" element={<SingleProduct loggedInUsername={loggedInUsername}/>}></Route>
-        <Route path="/order-confirmation" element={<OrderConfirmation />}></Route>
+        <Route path="/items" element={<Items loggedInUsername={loggedInUsername} updateLoggedInUsername={updateLoggedInUsername} availableCategories={availableCategories} updateAvailableCategories={updateAvailableCategories}/>}></Route>
+        <Route path="/items/:item_id" element={<SingleProduct loggedInUsername={loggedInUsername} buyNow={buyNow} updateBuyNow={updateBuyNow}/>}></Route>
+        <Route path="/order-confirmation" element={<OrderConfirmation buyNow={buyNow}/>}></Route>
         <Route path="/users" element={<Users allUsers={allUsers} updateAllUsers={updateAllUsers} loggedInUsername={loggedInUsername}/>}></Route>
-        <Route path="/create-an-account" element={<CreateAnAccount updateLoggedInUsername={updateLoggedInUsername}/>}></Route>
+        <Route path="/create-an-account" element={<CreateAnAccount />}></Route>
+        <Route path="/sell-an-item" element={<SellAnItem loggedInUsername={loggedInUsername} availableCategories={availableCategories} updateAvailableCategories={updateAvailableCategories}/>}></Route>
       </Routes>
       <Footer />
     </div>
