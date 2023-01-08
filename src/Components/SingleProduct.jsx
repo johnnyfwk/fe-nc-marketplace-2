@@ -5,11 +5,10 @@ import * as api from '../api';
 function SingleProduct( {loggedInUsername, updateBuyNow, orderedItems, updateOrderedItems} ) {
     const itemId = useParams().item_id;
     const [singleProduct, updateSingleProduct] = useState( {} );
-    const [isProductPurchased, updateIsProductPurchased] = useState(false);
+    const [isProductPurchased, updateIsProductPurchased] = useState(null);
     const [isItemDeletedSuccessfully, updateIsItemDeletedSuccessfully] = useState(null);
 
     console.log(loggedInUsername, "<<<<<<<<   loggedInUsername");
-    console.log(singleProduct, "<<<<<<<<<<< singleProduct");
 
     useEffect(() => {
         api.getProduct(itemId)
@@ -18,29 +17,47 @@ function SingleProduct( {loggedInUsername, updateBuyNow, orderedItems, updateOrd
             })
     }, []);
 
+    useEffect(() => {
+        api.getPreviousOrders(loggedInUsername)
+            .then((previousOrders) => {
+                updateOrderedItems(previousOrders);
+            })
+    }, [])
+
     function handleAddToBasket(event) {
         event.preventDefault();
         console.log("Add to basket button pressed.");
     }
 
+    const orderedItemsCopy = orderedItems.map((item) => {
+        return { ...item };
+    })
+    
+
     function handleBuyNow(event) {
         event.preventDefault();
-        console.log("Buy Now button pressed.");
-        updateBuyNow(singleProduct);
-        updateIsProductPurchased(true);
+        const orderedItemsCopyPlusPurchasedItem = [ ...orderedItemsCopy, singleProduct ];
+
+        api.postAnItemToAUsersOrderHistory(loggedInUsername, {"item_id": singleProduct.item_id})
+            .then((itemAddedToUsersOrderHistory) => {
+                updateBuyNow(singleProduct);
+                updateIsProductPurchased(true);
+                updateOrderedItems(orderedItemsCopyPlusPurchasedItem);
+            })
+            .catch((error) => {
+                console.log(error, "<<<<<<<<<<<<< error");
+                updateIsProductPurchased(false);
+            })
     }
 
     function handleDeleteItem(event) {
         console.log("Delete Item button pressed.");
         event.preventDefault();
-        console.log(singleProduct.item_id, "<<<<<<< singleProduct.item_id");
         api.deleteAnItem(singleProduct.item_id)
             .then((response) => {
-                console.log(response, "<<<<<<<<<<<<<<< successful deletion of an item response")
                 updateIsItemDeletedSuccessfully(true);
             })
             .catch((error) => {
-                console.log(error, "<<<<<<<<<<<<<<< error item did not delete")
                 updateIsItemDeletedSuccessfully(false);
             })
     }
@@ -52,7 +69,10 @@ function SingleProduct( {loggedInUsername, updateBuyNow, orderedItems, updateOrd
             <p>{singleProduct.description}</p>
             <p>Price: £{parseFloat(singleProduct.price)/100}</p>
 
-            {isProductPurchased ? <p id="product-purchase-confirmation-message">Nice! You have just purchased this product!</p> : null}
+            {isProductPurchased === null ? null
+                : isProductPurchased === true ? <p id="product-purchase-confirmation-message">Nice! You have just purchased this product!</p>
+                    : <p id="product-purchase-failed">Purchase of item failed.</p>}
+            {/* {isProductPurchased ? <p id="product-purchase-confirmation-message">Nice! You have just purchased this product!</p> : null} */}
 
             {isItemDeletedSuccessfully === null ? null
                 : isItemDeletedSuccessfully === true ? <p id="delete-item-successful">Item was successfully deleted!</p>

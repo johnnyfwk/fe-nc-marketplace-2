@@ -9,7 +9,6 @@ function OrderedItems( {loggedInUsername, orderedItems, updateOrderedItems} ) {
             .then((previousOrders) => {
                 updateOrderedItems(previousOrders);
             })
-
     }, []);
 
     const renderOrderedItems = orderedItems.map((item) => {

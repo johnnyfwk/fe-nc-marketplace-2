@@ -21,7 +21,8 @@ nav {
 #username-does-not-exist,
 #username-is-not-available,
 #post-an-item-for-sale-failed,
-#delete-item-failed {
+#delete-item-failed,
+#product-purchase-failed {
   color: red;
 }
 

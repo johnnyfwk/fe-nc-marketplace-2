@@ -70,3 +70,11 @@ export function getPreviousOrders(username) {
             return response.data.items;
         })
 }
+
+export function postAnItemToAUsersOrderHistory(username, itemIdInObject) {
+    return apiBaseUrl
+        .post(`/users/${username}/orders`, itemIdInObject)
+        .then((response) => {
+            return response.data.item;
+        })
+}
