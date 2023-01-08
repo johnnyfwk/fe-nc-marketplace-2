@@ -6,7 +6,6 @@ import DisplayProducts from './DisplayProducts';
 
 function Items( {loggedInUsername, updateLoggedInUsername, availableCategories, updateAvailableCategories} ) {
     const [availableProducts, updateAvailableProducts] = useState( [] );
-    // const [availableCategories, updateAvailableCategories] = useState( ["All"] );
     const [selectedCategory, updateSelectedCategory] = useState( "All" );
 
     console.log(loggedInUsername, "<<<<<<<<<<<< loggedInUsername");

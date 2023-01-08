@@ -54,3 +54,19 @@ export function postAnItemForSale(itemToPostForSale) {
             return response;
         })
 }
+
+export function deleteAnItem(idOfItemToDelete) {
+    return apiBaseUrl
+        .delete(`/items/${idOfItemToDelete}`)
+        .then((response) => {
+            return response;
+        })
+}
+
+export function getPreviousOrders(username) {
+    return apiBaseUrl
+        .get(`/users/${username}/orders`)
+        .then((response) => {
+            return response.data.items;
+        })
+}

@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import * as api from '../api';
 
-function SingleProduct( {loggedInUsername, buyNow, updateBuyNow} ) {
+function SingleProduct( {loggedInUsername, updateBuyNow, orderedItems, updateOrderedItems} ) {
     const itemId = useParams().item_id;
     const [singleProduct, updateSingleProduct] = useState( {} );
     const [isProductPurchased, updateIsProductPurchased] = useState(false);
+    const [isItemDeletedSuccessfully, updateIsItemDeletedSuccessfully] = useState(null);
 
     console.log(loggedInUsername, "<<<<<<<<   loggedInUsername");
+    console.log(singleProduct, "<<<<<<<<<<< singleProduct");
 
     useEffect(() => {
         api.getProduct(itemId)
@@ -28,6 +30,21 @@ function SingleProduct( {loggedInUsername, buyNow, updateBuyNow} ) {
         updateIsProductPurchased(true);
     }
 
+    function handleDeleteItem(event) {
+        console.log("Delete Item button pressed.");
+        event.preventDefault();
+        console.log(singleProduct.item_id, "<<<<<<< singleProduct.item_id");
+        api.deleteAnItem(singleProduct.item_id)
+            .then((response) => {
+                console.log(response, "<<<<<<<<<<<<<<< successful deletion of an item response")
+                updateIsItemDeletedSuccessfully(true);
+            })
+            .catch((error) => {
+                console.log(error, "<<<<<<<<<<<<<<< error item did not delete")
+                updateIsItemDeletedSuccessfully(false);
+            })
+    }
+
     return (
         <div>
             <h1>{singleProduct.item_name}</h1>
@@ -37,13 +54,21 @@ function SingleProduct( {loggedInUsername, buyNow, updateBuyNow} ) {
 
             {isProductPurchased ? <p id="product-purchase-confirmation-message">Nice! You have just purchased this product!</p> : null}
 
+            {isItemDeletedSuccessfully === null ? null
+                : isItemDeletedSuccessfully === true ? <p id="delete-item-successful">Item was successfully deleted!</p>
+                    : <p id="delete-item-failed">Item was not deleted</p>}
+
             <form onSubmit={handleAddToBasket}>
                 <button>Add To Basket</button>
             </form>
             
             <form onSubmit={handleBuyNow}>
                 <button>Buy Now</button>
-            </form>            
+            </form>
+
+            <form onSubmit={handleDeleteItem}>
+                <button>Delete Item</button>
+            </form>        
         </div>
     )
 }

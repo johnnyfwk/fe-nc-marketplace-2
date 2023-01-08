@@ -36,11 +36,9 @@ function SellAnItem( {loggedInUsername, availableCategories, updateAvailableCate
         console.log(itemToPost, "<<<<<<<<<<< itemToPost");
         api.postAnItemForSale(itemToPost)
             .then((response) => {
-                console.log(response, "<<<<<<< response");
                 updateIsItemPostingSuccessful(true);
             })
             .catch((error) => {
-                console.log(error, "<<<<<<<<<<<< post an item for sale error");
                 updateIsItemPostingSuccessful(false);
             })
     }
@@ -51,7 +49,7 @@ function SellAnItem( {loggedInUsername, availableCategories, updateAvailableCate
             <p>Post an item for sale by filling out the details below.</p>
 
             <form onSubmit={handleSubmit}>
-                <label htmlFor="sell-an-item-name">Name of product for sale: </label>
+                <label htmlFor="sell-an-item-name">Name of item: </label>
                 <input
                     type="text"
                     id="sell-an-item-name"

@@ -20,13 +20,15 @@ nav {
 
 #username-does-not-exist,
 #username-is-not-available,
-#post-an-item-for-sale-failed {
+#post-an-item-for-sale-failed,
+#delete-item-failed {
   color: red;
 }
 
 #username-is-available,
 #product-purchase-confirmation-message,
-#post-an-item-for-sale-successful {
+#post-an-item-for-sale-successful,
+#delete-item-successful {
   color: green;
 }
 

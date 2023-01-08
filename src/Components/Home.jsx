@@ -10,7 +10,7 @@ function Home( {allUsers, updateLoggedInUsername} ) {
     }, []);
 
     const existingUsers = allUsers.map((user) => {
-        return user.username.toLowerCase();
+        return user.username;
     })
 
     function handleSubmit(event) {
