@@ -1,4 +1,4 @@
-A made-up marketplace where visitors can users can browse, buy, and sell secondhand items.
+A made-up marketplace where users can browse, buy, and sell secondhand items.
 
 This app was created using React and uses Axios to pull data from an API.
 
